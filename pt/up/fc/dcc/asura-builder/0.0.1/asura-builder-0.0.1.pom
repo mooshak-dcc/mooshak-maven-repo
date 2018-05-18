@@ -168,10 +168,10 @@
                     <includePluginDependencies>true</includePluginDependencies>
                     <mainClass>pt.up.fc.dcc.asura.builder.GameServer</mainClass>
                     <commandlineArgs>
-                        bullseye pt.up.fc.dcc.asura.builder.bullseye.BullseyeManager java solutions/GurneyBullseyePlayer.java gurney js solutions/JcpaivaBullseyePlayer.js jcpaiva
+                        bullseye pt.up.fc.dcc.asura.builder.bullseye.BullseyeManager es6 solutions/JcpaivaBullseyePlayerES6.js zp js solutions/JcpaivaBullseyePlayer.js jcpaiva
                     </commandlineArgs>
                     <!--<commandlineArgs>
-                        tictactoe pt.up.fc.dcc.asura.builder.tictactoe.TicTacToeManager java solutions/MyTTTPlayer.java jcpaiva js solutions/MyTTTPlayer.js zp
+                        tictactoe pt.up.fc.dcc.asura.builder.tictactoe.TicTacToeManager es6 solutions/MyTTTPlayerES6.js jcpaiva js solutions/MyTTTPlayer.js zp
                     </commandlineArgs>-->
                 </configuration>
             </plugin>

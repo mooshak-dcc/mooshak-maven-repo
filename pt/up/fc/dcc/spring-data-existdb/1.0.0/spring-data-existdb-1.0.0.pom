@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>pt.up.fc.dcc</groupId>
+    <artifactId>spring-data-existdb</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>eXist-db Spring Data</name>
+    <description>
+        Provides support when accessing eXist databases with Java and XQuery on top of Spring Data.
+    </description>
+
+    <properties>
+        <jdk.level>1.8</jdk.level>
+
+        <!-- dependencies versions -->
+        <xqj.api.version>1.0</xqj.api.version>
+        <com.xqj2.version>0.0.1</com.xqj2.version>
+        <net.xqj.exist-xqj-api.version>1.0.1</net.xqj.exist-xqj-api.version>
+
+        <org.springframework.spring.version>5.1.6.RELEASE</org.springframework.spring.version>
+        <org.springframework.data.version>2.1.6.RELEASE</org.springframework.data.version>
+
+        <slf4j.api.version>1.8.0-beta4</slf4j.api.version>
+
+        <javax.inject.version>1</javax.inject.version>
+        <junit-jupiter-api.version>5.4.2</junit-jupiter-api.version>
+        <harmcrest-library.version>2.1</harmcrest-library.version>
+
+        <!-- plugin versions -->
+        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+        <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
+        <site-maven-plugin.version>0.12</site-maven-plugin.version>
+
+        <!-- github server corresponds to entry in ~/.m2/settings.xml -->
+        <github.global.server>github</github.global.server>
+        <github.repository.name>mooshak-maven-repo</github.repository.name>
+        <github.repository.owner>mooshak-dcc</github.repository.owner>
+    </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>internal</id>
+            <name>Temporary Staging Repository</name>
+            <url>file://${project.build.directory}/mvn-repo</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencies>
+
+        <!-- XQuery dependencies -->
+        <dependency>
+            <groupId>javax.xml.xquery</groupId>
+            <artifactId>xqj-api</artifactId>
+            <version>${xqj.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xqj2</groupId>
+            <artifactId>xqj2</artifactId>
+            <version>${com.xqj2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.xqj</groupId>
+            <artifactId>exist-xqj-api</artifactId>
+            <version>${net.xqj.exist-xqj-api.version}</version>
+        </dependency>
+
+        <!-- Spring dependencies -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework.spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${org.springframework.spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>${org.springframework.spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>${org.springframework.data.version}</version>
+        </dependency>
+
+        <!-- logging dependencies -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.api.version}</version>
+        </dependency>
+
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter-api.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter-api.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>${javax.inject.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>${harmcrest-library.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${maven-install-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>install-xqj-api</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>javax.xml.xquery</groupId>
+                            <artifactId>xqj-api</artifactId>
+                            <version>${xqj.api.version}</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/lib/xqj-api-${xqj.api.version}.jar</file>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>install-xqj2</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.xqj2</groupId>
+                            <artifactId>xqj2</artifactId>
+                            <version>${com.xqj2.version}</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/lib/xqj2-${com.xqj2.version}.jar</file>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>install-exist-xqj-api</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>net.xqj</groupId>
+                            <artifactId>exist-xqj-api</artifactId>
+                            <version>${net.xqj.exist-xqj-api.version}</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/lib/exist-xqj-api-${net.xqj.exist-xqj-api.version}.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdk.level}</source>
+                    <target>${jdk.level}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+
+            <!-- Deploy JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+                <configuration>
+                    <altDeploymentRepository>
+                        internal::default::file://${project.build.directory}/mvn-repo
+                    </altDeploymentRepository>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>${site-maven-plugin.version}</version>
+                <configuration>
+                    <message>Maven artifacts for ${project.name} (${project.groupId}.${project.artifactId}-${project.version})
+                    </message>
+                    <noJekyll>true</noJekyll>
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <branch>refs/heads/${project.artifactId}-${project.version}</branch>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <repositoryName>${github.repository.name}</repositoryName>
+                    <repositoryOwner>${github.repository.owner}</repositoryOwner>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

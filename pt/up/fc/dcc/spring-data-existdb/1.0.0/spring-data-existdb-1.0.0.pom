@@ -28,6 +28,7 @@
         <slf4j.api.version>1.8.0-beta4</slf4j.api.version>
 
         <javax.inject.version>1</javax.inject.version>
+        <javax.validation.version>2.0.1.Final</javax.validation.version>
         <junit-jupiter-api.version>5.4.2</junit-jupiter-api.version>
         <harmcrest-library.version>2.1</harmcrest-library.version>
 
@@ -98,6 +99,12 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.api.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
+        </dependency>
+
 
         <!-- test dependencies -->
         <dependency>

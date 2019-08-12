@@ -106,7 +106,6 @@
             <version>${javax.validation.version}</version>
         </dependency>
 
-
         <!-- test dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
